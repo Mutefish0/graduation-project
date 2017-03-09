@@ -14,4 +14,4 @@ def postData():
     response.set_header('Content-Type','application/json')
     return process(request.json)
 
-run(host='localhost', port=8080, debug=True)
+run(host='localhost', port=6484, debug=True)
