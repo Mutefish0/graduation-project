@@ -1,0 +1,11 @@
+#cv {
+    background: #444444;
+    cursor: pointer;
+}
+
+#recognize {
+    margin-top: 20px;
+    height: 32px;
+    width: 300px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
