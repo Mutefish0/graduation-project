@@ -93,7 +93,7 @@
             }
         }
         return function (json) {
-            xhr.open('POST', '/pd')
+            xhr.open('POST', './pd')
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.send(JSON.stringify(json))
         }

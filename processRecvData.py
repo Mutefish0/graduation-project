@@ -57,5 +57,5 @@ def process(recv):
 
     return {
         'number': np.argmax(labels[0]),
-        'probs': labels
+        'probs': [round(label * 100, 2) for label in labels[0]]
     }
