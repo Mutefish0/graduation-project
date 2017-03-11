@@ -22,6 +22,11 @@
 
     elc.addEventListener('mousedown', start)
     elc.addEventListener('mouseup', end)
+
+    // 移动端
+    elc.addEventListener('touchstart', mStart)
+    elc.addEventListener('touchend', mEnd)
+
     window.addEventListener('resize', function () {
         y = getTop(elc) + yoffset
         x = getLeft(elc) + xoffset
@@ -47,6 +52,12 @@
         cv.stroke()
     }
 
+    //移动端
+    function mMove (e) {
+        cv.lineTo(e.touches[0].clientX - x, e.touches[0].clientY - y)
+        cv.stroke()
+    }
+
     // 开始一次笔画
     function start (e) {
         resetView()
@@ -56,9 +67,24 @@
         elc.addEventListener('mousemove', move)
     }
 
+    //移动端
+    function mStart (e) {
+        resetView()
+        clearTimeout(startRecogT)
+        cv.beginPath()
+        cv.moveTo(e.touches[0].clientX - x, e.touches[0].clientY - y)
+        elc.addEventListener('touchmove', mMove)
+    }
+
     // 结束一次笔画
     function end (e) {
         elc.removeEventListener('mousemove', move)
+        startRecogT = setTimeout(startRecognize, 1500)
+    }
+
+    //移动端
+    function mEnd (e) {
+        elc.removeEventListener('touchmove', mMove)
         startRecogT = setTimeout(startRecognize, 1500)
     }
 
