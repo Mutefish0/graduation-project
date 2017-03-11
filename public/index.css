@@ -1,11 +1,120 @@
+html,body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: #F4F4F4;
+    font-family: PingFang-SC,Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    color: #4d4d4d;
+}
+
+.main {
+    box-sizing: border-box;
+    position: absolute;
+    width: 540px;
+    height: 642px;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -380px;
+}
+
+@font-face {
+    font-family: number-font;
+    src: url(./font.woff);
+}
+
+section {
+    margin: 0;
+    padding: 0;
+    border-radius: 2px;
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+    text-align: center;
+    background-color:  #505050;
+    margin-bottom: 3px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+.title {
+    font-size: 58px;
+    text-align: center;
+    padding: 24px;
+    margin: 0;
+    color: rgba(78, 128, 152, 0.15);
+    font-weight: lighter;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.mid {
+    position: relative;
+}
+
+.tip {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+}
+
+.tip.pencil {
+    background: url(./pencil.png);
+    width: 16px;
+    height: 16px;
+    background-size: 100% 100%;
+}
+
+.tip.analyze {
+    background: url(./bar-graph.png);
+    width: 16px;
+    height: 16px;
+    background-size: 100% 100%;
+}
+
+.result {
+    position: relative;
+    height: 200px;
+    background-color: #F9F8FD;
+    padding-left: 200px;
+}
+
+.result .tip {
+    color: rgba(78, 128, 152, 0.90);
+}
+
 #cv {
-    background: #444444;
-    cursor: pointer;
+    cursor: url(./pen.png), default;
 }
 
 #recognize {
-    margin-top: 20px;
-    height: 32px;
-    width: 300px;
-    border: 1px solid rgba(0,0,0,0.2);
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 200px;
+    text-align: center;
+    font-size: 168px;
+    color: rgba(75, 192, 192, 0.8);
+    font-weight: lighter;
+    font-family: number-font;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.analyze-chart {
+    height: 200px;
+    padding: 10px;
+    position: relative;
+    left: -10px;
+}
+
+#correct {
+    display: none;
 }

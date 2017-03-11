@@ -6,10 +6,23 @@
         <link rel="stylesheet" href="./index.css">
     </head>
     <body>
-        <h1> MNIST </h1>
-        <canvas id="cv" width="300" height="300"></canvas>
-        <input id="correct" placeholder="你将输入的数字" type="number">
-        <div id="recognize"></div>
+        <div class="main">
+            <h1 class="title"> 手写数字识别 </h1>
+            <section class="mid">
+                <div class="tip pencil"></div>
+                <canvas id="cv" width="540" height="300"></canvas>
+            </section>
+            <section class="result">
+                <div class="tip analyze"></div>
+                <input id="correct" placeholder="你将输入的数字" type="number">
+                <div id="recognize"> 0 </div>
+                <div class="analyze-chart">
+                    <canvas id="wave" width="340" height="200"></canvas>
+                </div>
+            </section>
+        </div>
+        <script type="text/javascript" src="./chart.min.js"></script>
+        <script type="text/javascript" src="./wave.js"></script>
         <script type="text/javascript" src="./index.js"></script>
     </body>
 </html>

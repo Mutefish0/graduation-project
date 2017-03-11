@@ -1,5 +1,8 @@
+import bottle
 from bottle import get, post, request, response, static_file, run
 from processRecvData import process
+
+bottle.BaseRequest.MEMFILE_MAX = 1024 * 1024
 
 @get('/')
 def index():

@@ -1,43 +1,71 @@
 ~ function () {
-    var elcv = document.getElementById('cv'),
-        elcorrect = document.getElementById('correct')
-        cv = elcv.getContext('2d'),
-        height = elcv.height,
-        width = elcv.width,
-        startRecogT = null
+    var elc = document.getElementById('cv'),
+        elr = document.getElementById('recognize'),
+        elcorrect = document.getElementById('correct'),
+        cv = elc.getContext('2d'),
+        height = elc.height,
+        width = elc.width,
+        startRecogT = null,
+        x = 0,
+        y = 0,
+        xoffset = 0,
+        yoffset = -24
+
+    y = getTop(elc) + yoffset
+    x = getLeft(elc) + xoffset
 
     cv.strokeStyle = '#fff'
     cv.lineWidth = 8
     cv.lineCap = 'round'
     cv.lineJoin = 'round'
 
-    elcv.addEventListener('mousedown', start)
-    elcv.addEventListener('mouseup', end)
+
+    elc.addEventListener('mousedown', start)
+    elc.addEventListener('mouseup', end)
+    window.addEventListener('resize', function () {
+        y = getTop(elc) + yoffset
+        x = getLeft(elc) + xoffset
+    })
+
+    function getTop (el) {
+        var offset = el.offsetTop
+        if(el.offsetParent != null)
+            offset += getTop(el.offsetParent)
+        return offset
+    }
+
+    function getLeft (el) {
+        var offset = el.offsetLeft
+        if(el.offsetParent != null)
+            offset += getLeft(el.offsetParent)
+        return offset
+    }
 
     // 鼠标移动
     function move (e) {
-        cv.lineTo(e.clientX - elcv.offsetLeft, e.clientY - elcv.offsetTop)
+        cv.lineTo(e.clientX - x, e.clientY - y)
         cv.stroke()
     }
 
     // 开始一次笔画
     function start (e) {
+        resetView()
         clearTimeout(startRecogT)
         cv.beginPath()
-        cv.moveTo(e.clientX - elcv.offsetLeft, e.clientY - elcv.offsetTop)
-        elcv.addEventListener('mousemove', move)
+        cv.moveTo(e.clientX - x, e.clientY - y)
+        elc.addEventListener('mousemove', move)
     }
 
     // 结束一次笔画
     function end (e) {
-        elcv.removeEventListener('mousemove', move)
+        elc.removeEventListener('mousemove', move)
         startRecogT = setTimeout(startRecognize, 1500)
     }
 
     // 开始处理识别
     function startRecognize () {
         var rect = getTargetRect()
-        cv.strokeStyle = 'green'
+        cv.strokeStyle = 'indianred'
         cv.lineWidth = 2
         cv.strokeRect(rect[0], rect[1], rect[2], rect[3])
         cv.strokeStyle = '#fff'
@@ -55,14 +83,9 @@
     }
 
     // 识别完毕
-    var recognized = (function () {
-        var el = document.getElementById('recognize')
-        return function (number) {
-            el.innerHTML = number
-            elcorrect.value = ''
-            cv.clearRect(0, 0, width, height)
-        }
-    }) ()
+    function recognized (data) {
+        updateView(data)
+    }
 
     function imageDataToJson (imageData) {
         var jsonData = []
@@ -89,7 +112,7 @@
         var xhr = new XMLHttpRequest()
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                recognized(JSON.parse(xhr.responseText).number)
+                recognized(JSON.parse(xhr.responseText))
             }
         }
         return function (json) {
@@ -133,6 +156,18 @@
                     return y
             }
         }
+    }
+
+    function resetView () {
+
+    }
+
+    function updateView (data) {
+        elr.innerHTML = data.number
+        elcorrect.value = ''
+        cv.clearRect(0, 0, width, height)
+
+        drwaWave(data)
     }
 
 } ()
