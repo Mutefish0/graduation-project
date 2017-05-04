@@ -11,6 +11,11 @@
         xoffset = 0,
         yoffset = -24
 
+    document.body.style.overflow = 'hidden'
+    document.ontouchmove = function (e) {
+        e.preventDefault()
+    }
+
     y = getTop(elc) + yoffset
     x = getLeft(elc) + xoffset
 
