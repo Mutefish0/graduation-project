@@ -9,12 +9,26 @@
         x = 0,
         y = 0,
         xoffset = 0,
-        yoffset = -24
+        yoffset = -24,
+        correctFlag = 0,
+        tmo
 
     document.body.style.overflow = 'hidden'
     document.ontouchmove = function (e) {
         e.preventDefault()
     }
+
+    document.addEventListener('click', function () {
+        correctFlag += 1
+        clearTimeout(tmo)
+        tmo = setTimeout(function () {
+            if (correctFlag == 3) {
+                elcorrect.style.display =
+                    elcorrect.style.display == "none" ? "block" : "none"
+            }
+            correctFlag = 0
+        }, 300)
+    })
 
     y = getTop(elc) + yoffset
     x = getLeft(elc) + xoffset

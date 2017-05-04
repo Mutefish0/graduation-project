@@ -116,5 +116,14 @@ section {
 }
 
 #correct {
+    position: absolute;
+    width: 150px;
+    height: 26px;
+    left: 24px;
+    bottom: 9px;
+    outline: none;
+    border: 1px solid rgba(0,0,0,0.08);
+    z-index: 100;
+    text-indent: 4px;
     display: none;
 }
