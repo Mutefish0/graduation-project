@@ -27,4 +27,4 @@ def show(label, n_pictures):
 
             if n_pictures <= 0: return
 
-show(9, 4)
+show(7, 10)
